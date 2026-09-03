@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Field Guide — your personal power-user course</title>
+<meta name="description" content="A Hermes power-user course that starts from your actual usage. Answer a few questions and it teaches only what you're missing.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F6F66'/%3E%3Cpath d='M9 7v7.5h2V7H9zm12 0v7.5h-2V7h2zM16 7v4.5h-2V7h2zm0 8.5c-2.5 0-4.5 1.6-4.5 3.8V25h9v-5.7c0-2.2-2-3.8-4.5-3.8z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="mast">
+  <div class="mast-inner">
+    <button class="brand" data-nav="home" aria-label="Field Guide home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">Hermes <em>Field Guide</em></span>
+    </button>
+    <div class="mast-right">
+      <div class="progress-chip" id="mastProgress" hidden>
+        <span class="progress-dot" aria-hidden="true"></span>
+        <span id="mastProgressText"></span>
+      </div>
+      <button class="ghost-btn" id="reassessBtn" data-nav="assess" hidden>Re-run assessment</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="view-wrap">
+  <!-- Views are rendered by app.js into #view -->
+  <div id="view" tabindex="-1"></div>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-inner">
+    <span>Made for your setup · nothing you mark is sent anywhere — it lives in this browser.</span>
+    <span class="foot-links">
+      <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">Official docs</a>
+      <a href="https://hermes-agent.nousresearch.com/docs/getting-started/learning-path" target="_blank" rel="noopener">Learning path</a>
+    </span>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
