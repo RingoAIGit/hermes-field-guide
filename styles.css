@@ -505,6 +505,11 @@ button { font-family: inherit; cursor: pointer; }
   .hero { padding: 28px 22px 24px; }
   .prose { padding: 22px 18px; }
   .mod-card { flex-wrap: wrap; }
+  /* The meta column can't shrink (flex:none) and is ~215px wide, so from ~355px to
+     ~555px viewport the row "fits" and .m-body (flex:1 1 0%) collapses to a few px —
+     titles wrap one word per line. Give the body a real flex basis so the meta wraps
+     onto its own line instead. Verified 320–768px. */
+  .mod-card .m-body { flex: 1 1 200px; }
   .mod-card .m-meta { flex-direction: row; align-items: center; }
   .progress-chip span:first-child { display: none; }
   .brand-text { font-size: 17px; }
