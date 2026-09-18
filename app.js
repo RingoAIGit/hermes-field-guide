@@ -47,6 +47,7 @@ function setView(html) {
   $view.classList.remove("view-enter");
   void $view.offsetWidth; /* restart animation */
   $view.classList.add("view-enter");
+  $view.focus({ preventScroll: true }); /* move focus so screen readers and keyboard users land in the new view */
   window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
 }
 
@@ -210,7 +211,7 @@ function viewHome() {
       ${memBlock()}`;
   }
 
-  const modCards = (MODULES).map(m => moduleCardHtml(m, false)).join("");
+  const modCards = activeModules().map(m => moduleCardHtml(m, false)).join("");
   const doneCardSection = doneModules().length
     ? `<div class="done-wrap">
         <button class="done-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.setAttribute('aria-expanded', this.getAttribute('aria-expanded')==='true'?'false':'true')" aria-expanded="false">
@@ -295,7 +296,7 @@ function renderQuestion() {
       <span><span class="q-opt-t">${esc(o.label)}</span>
       ${o.d ? `<span class="q-opt-d">${esc(o.d)}</span>` : ""}</span>
     </button>`).join("");
-  const pct = Math.round(((qIdx) / QUESTIONS.length) * 100);
+  const pct = Math.round(((qIdx + 1) / QUESTIONS.length) * 100);
   setView(`
     <div class="assess-progress">
       <div class="a-row"><span>Question ${qIdx + 1} of ${QUESTIONS.length}</span><span>${pct}%</span></div>
@@ -437,6 +438,10 @@ function viewLesson(lessonId) {
   const m = MODULES.find(x => x.id === l.moduleId);
   const flat = flatVisibleLessons();
   const idx = flat.findIndex(x => x.id === lessonId);
+  /* A lesson can drop out of the plan when a re-assessment marks its module "done".
+     idx is then -1 and idx < flat.length - 1 is still true, which used to point the
+     Next button at an unrelated lesson. Send them home instead. */
+  if (idx === -1) { viewHome(); return; }
   const prevL = idx > 0 ? flat[idx - 1] : null;
   const nextL = idx < flat.length - 1 ? flat[idx + 1] : null;
   const tm = tagMeta(l);
